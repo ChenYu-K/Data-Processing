@@ -1,0 +1,7 @@
+Nmax=min(r2a(:,5));a=3; Pmax1=1;i=3;
+while( a > -1)   %すべり荷重の判定（1mm load or MAX load）
+    a=r2a(i,6)
+    Pmax1=min(r2a(i,4),r2a(i+1,4));
+    i=i+1
+end
+slip1=Pmax1/(-2*Nmax);
