@@ -1,5 +1,5 @@
 # Data Processing
-##test data
+## test data
 通过Matlab实现数据的自动整理
 目前完成：
 1.文件内容读取，并上传到matlab
@@ -7,6 +7,6 @@
 
 ---
 
-##neural network
+## neural network
 1. ANN_train
 3. BPNN
