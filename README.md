@@ -7,6 +7,6 @@
 
 ---
 
-## neural network
+## Neural Network
 1. ANN_train \ (using `Pytorch` )
 2. BPNN (Matlab_BPNN)
