@@ -8,5 +8,5 @@
 ---
 
 ## neural network
-1. ANN_train
+1. ANN_train(using *pytorch* )
 3. BPNN
