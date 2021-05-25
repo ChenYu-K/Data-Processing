@@ -8,5 +8,5 @@
 ---
 
 ## neural network
-1. ANN_train \\ (using `Pytorch` )
-3. BPNN
+1. ANN_train \ (using `Pytorch` )
+2. BPNN
