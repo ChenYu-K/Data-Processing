@@ -8,5 +8,5 @@
 ---
 
 ## neural network
-1. ANN_train\new (using `Pytorch` )
+1. ANN_train \newline (using `Pytorch` )
 3. BPNN
