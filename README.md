@@ -1,8 +1,9 @@
 # Data Processing
-
-## [Experment data Processing](Data-Processing/Experimental data processing/)
-![GitHub](https://img.shields.io/github/license/Kaede-cycy/Data-Processing?logoColor=green&style=plastic)
+![GitHub](https://img.shields.io/github/license/Kaede-cycy/data-prossing?logoColor=green&style=plastic)
 [![ocu-shield]][ocu]
+
+## [Experment data Processing]
+
 
 通过Matlab实现数据的自动整理
 Automatic data processing Using by MATLAB 
