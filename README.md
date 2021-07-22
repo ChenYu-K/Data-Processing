@@ -2,7 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/Kaede-cycy/data-prossing?logoColor=green&style=plastic)
 [![ocu-shield]][ocu]
 
-## Experment data Processing
+## Experment Data Processing
 
 Automatic data processing Using by MATLAB  
 通过Matlab实现数据的自动整理
