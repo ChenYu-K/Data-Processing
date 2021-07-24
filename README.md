@@ -39,9 +39,13 @@ Automatic data processing Using by MATLAB
 
 ## Abaqus script
 
- [^Abaqus]
+ Abaqus<sup id="a1">[[1]](#f1)</sup>
+
  
-## Ohter Automation
+## Ohter Automation]
+
+## Reference
+<span id="f1">1. [^](#a1)</span> 脚注1的说明
 
 [abaqus]:https://img.shields.io/badge/Abaqus-V.2020-blue?logo=Dassault%20Syst%C3%A8mes
 [ocu]:http://brdg.civil.eng.osaka-cu.ac.jp/index.html
