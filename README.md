@@ -2,6 +2,14 @@
 ![GitHub](https://img.shields.io/github/license/Kaede-cycy/data-prossing?logoColor=green&style=plastic)
 [![ocu-shield]][ocu]
 
+
+## Preface
+ Here, i summarized some scripts developed by myself and my laboratory for experimental data processing.    
+ The scripts are created by `Python`,`Matlab` and `Pytorch`. Although `Python` and `Matlab`'s grammar are very similar, most script have two version,`Python` and `Matlab`
+|name|function|
+|---|---|
+|read csv|read all the csv data where sored the same folder to matlab|
+
 ## Experment Data Processing
 
 Automatic data processing Using by MATLAB  
