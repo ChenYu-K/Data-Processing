@@ -4,7 +4,7 @@
 
 
 ## Preface
- Here, i summarized some scripts developed by myself and my laboratory for experimental data processing.    
+ Here, i summarized some scripts created by myself and my laboratory for experimental data processing.    
  The scripts are created by `Python`,`Matlab` and `Pytorch`. Although `Python` and `Matlab`'s grammar are very similar, most script have two version,`Python` and `Matlab`
 |name|function|
 |---|---|
