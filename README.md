@@ -1,4 +1,4 @@
-# Data Processing
+# Automatic script
 ![GitHub](https://img.shields.io/github/license/Kaede-cycy/data-prossing?logoColor=green&style=plastic)
 [![ocu-shield]][ocu]
 ![abaqus]
