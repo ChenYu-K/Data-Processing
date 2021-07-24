@@ -3,10 +3,12 @@
 [![ocu-shield]][ocu]
 ![abaqus]
 
+> よくわからない
 
 # Preface
  Here, i summarized some scripts created by myself and my laboratory for experimental data processing.    
- The scripts are created by `Python`,`Matlab` and `Pytorch`. Although `Python` and `Matlab`'s grammar are very similar, most script have two version,`Python` and `Matlab`,the idea and the algorithm are basically the same.
+ The scripts are created by <kbd>Python</kbd>,<kbd>Matlab</kbd> and <kbd>Pytorch</kbd>. Although `Python` and `Matlab`'s grammar are very similar, most script have two version,`Python` and `Matlab`,the idea and the algorithm are basically the same.
+ 
 |name|function|
 |---|---|
 |read csv|read all the csv data where sored the same folder to matlab|
@@ -37,8 +39,11 @@ Automatic data processing Using by MATLAB
 
 ## Abaqus script
 
+ [^Abaqus]
+ 
 ## Ohter Automation
 
 [abaqus]:https://img.shields.io/badge/Abaqus-V.2020-blue?logo=Dassault%20Syst%C3%A8mes
 [ocu]:http://brdg.civil.eng.osaka-cu.ac.jp/index.html
 [ocu-shield]:https://img.shields.io/badge/OCU%20-Bridge%20Eng.%20LAB-blue
+[^Abaqus]: Dassult System manual 2020.
