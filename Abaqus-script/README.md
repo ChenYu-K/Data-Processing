@@ -4,3 +4,5 @@ automatic for Abaqus
 主要目标
 1.模型的自动创建
 2.数据自动处理
+
+## 出力
