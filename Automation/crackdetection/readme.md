@@ -7,12 +7,11 @@ https://stackoverflow.com/questions/57089115/background-texture-pattern-removal-
 
 ## cv2
 cv2处理前的裂缝图
-![](fig/rr2.png)
 cv2处理后的结果  
 source code:https://answers.opencv.org/question/205458/using-opencv-python-to-detect-concrete-cracks/
-![](result.png)
+
 <center class="half">
-    <img src="fig/rr2.png"/><img src="fig/result.png" width="200"/>
+    <img src="fig/rr2.png"width="300"/><img src="fig/result.png" width="300"/>
 </center>
 1
 2
