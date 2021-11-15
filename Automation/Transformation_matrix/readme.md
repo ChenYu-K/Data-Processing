@@ -7,11 +7,11 @@
 
 ---
 
-- [trans.m](/trans.m)は基本の変換アルゴリズム．
+- [trans.m](trans.m)は基本の変換アルゴリズム．
 - [app1.m](/app1.m)は関数[trans.m](/trans.m)を引用したGUIのSourceCode．
 - [transfer.mlapp](/transfer.mlapp)はGUIのSourceCode.
 - [Transformation_matrix.prj](/Transformation_matrix.prj)は出力オプション．
 
-##　使い方
+## 使い方
 `Transformation_matrix.mlappinstall`をインストールし，
 Matlabのappで実行する．
