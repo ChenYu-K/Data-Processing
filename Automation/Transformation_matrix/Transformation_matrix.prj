@@ -1,0 +1,74 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="4055880604" file="Z:\便利グッズ\9.色んなスクリプト\Matlab\膜厚計測自動変換\shirai-makuatsu\Transformation_matrix.prj" location="Z:\便利グッズ\9.色んなスクリプト\Matlab\膜厚計測自動変換\shirai-makuatsu" name="Transformation_matrix" target="target.mlapps" target-name="アプリのパッケージ化">
+    <param.appname>Transformation_matrix</param.appname>
+    <param.authnamewatermark>Group_D</param.authnamewatermark>
+    <param.email />
+    <param.company>Osaka City University</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary />
+    <param.description>フォルダ内すべてのCSVファイルの一列のデータを行列変換する</param.description>
+    <param.screenshot>C:\Users\brcy\AppData\Local\Temp\tpb7ec3c7d_4cde_44cb_88fa_ebb395a9a985.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>1ac02a09-738e-4ef1-8207-cc1f0767df46</param.guid>
+    <unset>
+      <param.email />
+      <param.icon />
+      <param.icons />
+      <param.summary />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\transfer.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="Z:\便利グッズ\9.色んなスクリプト\Matlab\膜厚計測自動変換" name="shirai-makuatsu" optional="false">Z:\便利グッズ\9.色んなスクリプト\Matlab\膜厚計測自動変換\shirai-makuatsu</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2020b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
