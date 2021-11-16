@@ -3,7 +3,7 @@
 [![ocu-shield]][ocu]
 ![abaqus]
 
-> よくわからない
+> Hi，
 
 # Preface
  Here, i summarized some scripts created by myself and my laboratory for experimental data processing.    
@@ -39,7 +39,7 @@ Automatic data processing Using by MATLAB
 
 ## Abaqus script
 
- Abaqus<sup id="a1">[[1]](#f1)</sup>
+ Abaqus<sup id="a1">[1](#f1)</sup>
 
  
 ## Ohter Automation]
