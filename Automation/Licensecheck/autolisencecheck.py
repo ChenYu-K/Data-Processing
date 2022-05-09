@@ -66,6 +66,5 @@ while True:
     # table(ax, df6, loc='center')  #
     #plt.savefig('license.png')
     df_styled = df6.style.background_gradient()
-    dfi.export(df_styled,".\lisence.png") #brwikiに保存する
+    dfi.export(df_styled,"V:\wiki\public\images\lisence.png") #brwikiに保存する
     #df6.to_csv('result.csv')
-    # "V:\wiki\public\images\lisence.png"
