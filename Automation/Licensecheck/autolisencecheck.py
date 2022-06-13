@@ -59,12 +59,30 @@ while True:
     #########################
     #グラフ化
     #########################
-    # fig = plt.figure(figsize=(3, 4), dpi=1400)
-    # ax = fig.add_subplot(111, frame_on=False) 
-    # ax.xaxis.set_visible(False)  # hide the x axis
-    # ax.yaxis.set_visible(False)  # hide the y axis
-    # table(ax, df6, loc='center')  #
-    #plt.savefig('license.png')
     df_styled = df6.style.background_gradient()
-    dfi.export(df_styled,"V:\wiki\public\images\lisence.png") #brwikiに保存する
-    #df6.to_csv('result.csv')
+    dfi.export(df_styled,"Z:\wiki\public\images\lisence.png") #brwikiに保存する
+    ############################
+    #CAE_License
+    ###########################
+    ######################################最初から数え，Licenseが現れるまでのデータを全部消す
+    for idx in df.index: 
+        if df.loc[idx,'License'] != None:
+            break
+    dfpc=df.drop(df.head(idx).index)
+    #######################新しいdfpcのLicenseを数え，Noneになったらまとめる．
+    for idc in dfpc.index:
+        if dfpc.loc[idc,'License'] == None:
+            break
+    dfpc=dfpc.head(idc-idx)
+    dfpc=dfpc.drop([1,'a','b','c','f','h'], axis=1)
+    dfpc['License'] = dfpc['License'].fillna(0).astype(int) #remove none and to int
+    ################################
+    lisumpc=dfpc['License'].sum()          #現在実行中の総使用量
+    reminpc=str(9-lisumpc)        #残量
+    alllisenpc='************Update time is :'+str(nowis)+'************'
+    lisenpc=str(lisumpc)+'/9'
+    dfpc.loc['Message']=[alllisenpc,'Reaming is',reminpc,lisenpc]
+    dfpc=dfpc.rename(columns={0:'PC_name_CAE_License'}) #rename
+    ################################
+    dfpc_styled = dfpc.style.background_gradient()
+    dfi.export(dfpc_styled,"Z:\wiki\public\images\caelisence.png")
