@@ -29,3 +29,11 @@ Abaqusで作成したモデルから`inp`ファイルを出力して，他の計
 - 時々`.log`ファイルが正しくフォルダ内に移動できないBUGを修正した
 - `Thread=1`にしても，複数`.inp`ファイルを置いたとき，列を並べず，同時に二つ`.inp`流す　BUGを修正した．
 -  判定時間及び条件を修正して，流れを最適化した．
+
+
+# License 
+
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+                        Copyright@2022 Osaka Metropolitan university Bridge Engineering Lab, yu chen
