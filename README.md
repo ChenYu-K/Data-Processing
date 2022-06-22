@@ -40,6 +40,16 @@ Automatic data processing Using by MATLAB
 
 ## Abaqus script
 
+### Abaqus自動直列実行 (Abaqus Serial Execution Script)
+
+ There is [Documentation](https://github.com/ChenYu-K/Data-Processing/tree/main/script/abaqus_run)
+
+|License|||
+|---|---|---|
+|50| CPU:1 を使って計算する|Download|
+|75| CPU:4 を使って計算する|Download|
+|GPU| CPU:8 + GPU:1 を使って計算する|Download|
+
  Abaqus<sup id="a1">[1](#f1)</sup>
 
  
