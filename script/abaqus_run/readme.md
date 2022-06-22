@@ -1,5 +1,7 @@
 # Abaqus自動直列実行スクリプト
 
+![](https://img.shields.io/badge/Check-Passing-green?style=plastic&logo=Visual%20Studio)
+
 Abaqusで作成したモデルから`inp`ファイルを出力して，他の計算機で自動に計算してもらうっという機能．
 
 # 機能
