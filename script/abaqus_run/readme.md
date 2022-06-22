@@ -36,4 +36,4 @@ Abaqusで作成したモデルから`inp`ファイルを出力して，他の計
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
-                        Copyright@2022 Osaka Metropolitan university Bridge Engineering Lab, yu chen
+Copyright@2022 Osaka Metropolitan university Bridge Engineering Lab, yu chen
