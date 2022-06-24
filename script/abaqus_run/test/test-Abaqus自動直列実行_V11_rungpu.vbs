@@ -8,11 +8,11 @@
 Option Explicit
 
 Dim objShell, objFSO
-Dim objFolder, objFile1, objFile2, strFile3, strFile2
+Dim objFolder, objFile1, objFile2, strFile3
 Dim intCPU, intThread
 Dim intI, intJ, intK, strNow
 
-intCPU=1     '計算時のCPU数を「intCPU=」のあとに半角数字で書く（1、2、4、8とか；4推奨）
+intCPU=8     '計算時のCPU数を「intCPU=」のあとに半角数字で書く（1、2、4、8とか；4推奨）
 intThread=1  '同時に計算する本数を「intThread=」のあとに半角数字で書く（1、2、3とか；1推奨）
 
 Set objShell = CreateObject("WScript.Shell")
@@ -51,7 +51,7 @@ objFile1.WriteLine " "
 objFile1.Close
 
 Do
-	
+
 	If objFSO.FileExists("Abaqus自動直列実行_停止方法.txt") = False Then
 		objShell.Popup "スクリプトが停止しました", 4, "Abaqus自動直列実行"
 		WScript.Quit
@@ -61,10 +61,10 @@ Do
 	finishLoop(objFolder)
 	WScript.sleep(1000)	'delated the for loop and change the time to 2s
 
+    
 	executeLoop(objFolder)
 Loop
 
-'let the job wait for run
 Sub queueLoop(objFolder)
 	On Error Resume Next
 	For Each objFile1 In objFolder.Files
@@ -75,7 +75,6 @@ Sub queueLoop(objFolder)
 	Next
 End Sub
 
-'check the presence of .lck and .com, then put all the file into finised folder.
 Sub finishLoop(objFolder)
 	On Error Resume Next
 	For Each objFile1 In objFolder.Files
@@ -94,7 +93,6 @@ Sub finishLoop(objFolder)
 	Next
 End Sub
 
-'if .log was existed, run command was not implemented.
 Sub executeLoop(objFolder)
 	'指定個(intThread)計算中なら新たに実行しない
 	intI=0
@@ -116,8 +114,8 @@ Sub executeLoop(objFolder)
 		If Right(objFile1.Name, 4)=".inp" and Left(objFile1.Name, 8)="_queued_" Then
 			strFile3 = Right(objFile1.Name, Len(objFile1.Name) - 24)
 			objFSO.MoveFile objFile1, strFile3
-			objShell.Run "abaqus job=" & Replace(strFile3, ".inp", "") & " cpu=" & intCPU & " ask_delete=OFF"
-			WScript.sleep(13000)
+			objShell.Run "abaqus job=" & Replace(strFile3, ".inp", "") & " cpus=" & intCPU & " gpus=1 ask_delete=OFF"
+			WScript.sleep(13000) 'change time to 15s
 			intJ = intJ + 1
 		End If
         If intJ >= intThread - intI Then

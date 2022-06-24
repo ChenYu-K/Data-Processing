@@ -1,7 +1,7 @@
 Option Explicit
 
 Dim objShell, objFSO
-Dim objFolder, objFile1, objFile2, strFile3, strFile2
+Dim objFolder, objFile1, objFile2, strFile3
 Dim intCPU, intThread
 Dim intI, intJ, intK, strNow
 
@@ -50,7 +50,7 @@ Do
 			WScript.Quit
 		End If
 		queueLoop(objFolder)
-		WScript.sleep(1200)	 ' change the 500ms to 1200ms,that for Waiting for the .log to finish reading and writing status.
+		WScript.sleep(500)	
 		finishLoop(objFolder)
 		WScript.sleep(500)	
 	Next
@@ -89,7 +89,7 @@ Sub executeLoop(objFolder)
 	'指定個(intThread)計算中なら新たに実行しない
 	intI=0
 	For Each objFile1 In objFolder.Files
-		If Right(objFile1.Name, 4)=".log" Then 'change .lck to .log, to prevent .lck from appearing too slow, cause abaqus calculate 2 inp at the same time.
+		If Right(objFile1.Name, 4)=".lck" Then
 			intI=intI+1
 		End If
 	Next
@@ -115,13 +115,3 @@ Sub executeLoop(objFolder)
 		End If
 	Next
 End Sub
-
-Function GetFileTitle(sFileName)        'Function without extension name
-    Dim pos
-    pos = InStrRev(sFileName, ".")      'Search for substrings from the end of the string forward(".")
-    if(pos = 0) Then                    'file have not extension_name
-        GetFileTitle = sFileName
-    else
-        GetFileTitle = Left(sFileName, pos - 1)
-    end if
-End Function
