@@ -27,8 +27,8 @@ Automatic data processing Using by MATLAB
 Matlabを用いてデータの自動化処理
 
 
-目前完成：
-1.文件内容读取，并上传到matlab　（CSVファイルの一括読み取り）
+目前完成：  
+1.文件内容读取，并上传到matlab　（CSVファイルの一括読み取り）  
 2.小型滑移实验的数据分析并整理（小型すべり試験のデータ整理）
 
 ---
