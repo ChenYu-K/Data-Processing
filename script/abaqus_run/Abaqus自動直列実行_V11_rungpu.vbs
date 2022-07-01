@@ -85,7 +85,7 @@ Sub finishLoop(objFolder)
 			objFSO.CreateFolder(objFolder & "\Finished_" & strNow & "_" & Replace(objFile1.Name, ".odb", ""))
 
 			For Each objFile2 In objFolder.Files
-				If InStr(objFile2, Replace(strFile3, ".odb", "")) > 0 Then
+				If InStr(objFile2, Replace(strFile3, ".odb", "")) > 0 and Left(objFile2.name,8)<>"_queued_" Then
 					objFSO.MoveFile objFile2, "Finished_" & strNow & "_" & Replace(strFile3, ".odb", "") & "\"
 				End If
 			Next
