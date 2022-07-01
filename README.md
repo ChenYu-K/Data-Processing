@@ -24,12 +24,12 @@
 ## Experment Data Processing
 
 Automatic data processing Using by MATLAB  
-通过Matlab实现数据的自动整理
+Matlabを用いてデータの自動化処理
 
 
 目前完成：
-1.文件内容读取，并上传到matlab
-2.小型滑移实验的数据分析并整理
+1.文件内容读取，并上传到matlab　（CSVファイルの一括読み取り）
+2.小型滑移实验的数据分析并整理（小型すべり試験のデータ整理）
 
 ---
 
