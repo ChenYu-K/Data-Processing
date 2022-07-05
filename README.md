@@ -53,7 +53,7 @@ Matlabを用いてデータの自動化処理
  Abaqus<sup id="a1">[1](#f1)</sup>
 
 # DIC
-## MP4 to AVI
+## [MP4 to AVI](/DIC)
 カスタマイズできるMP4からAVIに変換するアプリケーション
  
 ## Ohter Automation]
