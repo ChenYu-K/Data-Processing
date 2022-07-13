@@ -38,12 +38,13 @@ def generate_dataset(dir):
     """
     train_data = []
     for file_name in os.listdir(dir):
-        img_dir = os.path.join(dir, file_name)
-        img = cv.imread(img_dir)
-        img = cv.resize(img, (769, 432))   # /5 resize img
-        #img_gray = cv.cvtColor(img,cv.COLOR_RGB2GRAY)
-        pimg = Image.fromarray(img)
-        train_data.append(pimg)
+        if file_name != "Thumbs.db":
+            img_dir = os.path.join(dir, file_name)
+            img = cv.imread(img_dir)
+            img = cv.resize(img, (769, 432))   # /5 resize img
+            #img_gray = cv.cvtColor(img,cv.COLOR_RGB2GRAY)
+            pimg = Image.fromarray(img)
+            train_data.append(pimg)
     return train_data
 
 
@@ -98,8 +99,8 @@ def testAccuracy():
     net.eval()
     accuracy = 0.0
     total = 0.0
-    #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cpu")
 
     with torch.no_grad():
         for data in valid_loader:
@@ -121,8 +122,8 @@ def train(num_epochs):
     best_accuracy = 0.0
 
     # Define your execution device
-    #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cpu")
 
     # Convert model parameters and buffers to CPU or Cuda
     net.to(device)
@@ -189,7 +190,7 @@ def predict(model, device):
 
 # define the net
 # 训练次数
-TRAIN_TIMES = len(train_loader)-1
+#TRAIN_TIMES = len(train_loader)-1
 # 输入输出的数据维度，这里都是1维
 INPUT_FEATURE_DIM = 1000
 OUTPUT_FEATURE_DIM = 1
@@ -249,10 +250,10 @@ if __name__ == "__main__":
     print(images.shape)
     print(labels.shape)
 
-    #device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    #device = torch.device("cpu")
     # Let's build our model
-    train(5)
+    train(10)
     print('Finished Training')
 
     # Test which classes performed well
