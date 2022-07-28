@@ -1,3 +1,10 @@
+'Original file was created by Takai, V7~ Update and Modify by yu chen. 
+'Copyright@2022 Osaka Metroplitan University Bridge Engieering Lab
+'License: Apache License Version 2.0, January 2004 http://www.apache.org/licenses/
+'Update time is 2022.6.22
+'The project was pu on the https://github.com/ChenYu-K/Data-Processing/tree/main/script/abaqus_run/test
+'Update logfile was uploaded in github
+
 Option Explicit
 
 Dim objShell, objFSO
