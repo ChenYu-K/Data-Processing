@@ -58,9 +58,9 @@ else:
     ###########################################
     df6 = df5.groupby([0, 'day', 'Start_time'], sort=False)['License'].sum().reset_index()  # 時間同じ行のlICENSEを足し合わせる
     lisum = df6['License'].sum()  # 現在実行中の総使用量
-    remin = str(620 - lisum)  # 残量
+    remin = str(638 - lisum)  # 残量
     alllisen = '************Update time is :' + str(nowis) + '************'
-    lisen = str(lisum) + '/620'
+    lisen = str(lisum) + '/638'
     df6.loc[df6.index.max() + 1] = [alllisen, 'Reaming is', remin, lisen]
     df6 = df6.rename(columns={0: 'PC_name'})  # rename
     # print(df6)
@@ -89,9 +89,9 @@ else:
     dfpc['License'] = dfpc['License'].fillna(0).astype(int)  # remove none and to int
     ################################
     lisumpc = dfpc['License'].sum()  # 現在実行中の総使用量
-    reminpc = str(9 - lisumpc)  # 残量
+    reminpc = str(8 - lisumpc)  # 残量
     alllisenpc = '************Update time is :' + str(nowis) + '************'
-    lisenpc = str(lisumpc) + '/9'
+    lisenpc = str(lisumpc) + '/8'
     dfpc.loc['Message'] = [alllisenpc, 'Reaming is', reminpc, lisenpc]
     dfpc = dfpc.rename(columns={0: 'PC_name_CAE_License'})  # rename
 
