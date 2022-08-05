@@ -12,58 +12,59 @@ Dim objFolder, objFile1, objFile2, strFile3
 Dim intCPU, intThread
 Dim intI, intJ, intK, strNow
 
-intCPU=8     'ŒvZ‚ÌCPU”‚ğuintCPU=v‚Ì‚ ‚Æ‚É”¼Šp”š‚Å‘‚­i1A2A4A8‚Æ‚©G4„§j
-intThread=1  '“¯‚ÉŒvZ‚·‚é–{”‚ğuintThread=v‚Ì‚ ‚Æ‚É”¼Šp”š‚Å‘‚­i1A2A3‚Æ‚©G1„§j
+intCPU=8     'è¨ˆç®—æ™‚ã®CPUæ•°ã‚’ã€ŒintCPU=ã€ã®ã‚ã¨ã«åŠè§’æ•°å­—ã§æ›¸ãï¼ˆ1ã€2ã€4ã€8ã¨ã‹ï¼›4æ¨å¥¨ï¼‰
+intThread=1  'åŒæ™‚ã«è¨ˆç®—ã™ã‚‹æœ¬æ•°ã‚’ã€ŒintThread=ã€ã®ã‚ã¨ã«åŠè§’æ•°å­—ã§æ›¸ãï¼ˆ1ã€2ã€3ã¨ã‹ï¼›1æ¨å¥¨ï¼‰
 
 Set objShell = CreateObject("WScript.Shell")
 Set objFSO = WScript.CreateObject("Scripting.FileSystemObject")
 
 Set objFolder = objFSO.GetFolder(objShell.CurrentDirectory)
 
-Set objFile1 = objFSO.OpenTextFile("Abaqus©“®’¼—ñÀs_’â~•û–@.txt", 2, True)
-objFile1.WriteLine "***ƒXƒNƒŠƒvƒg‚Ì’â~•û–@***"
-objFile1.WriteLine " ‚±‚Ìƒtƒ@ƒCƒ‹uAbaqus©“®’¼—ñÀs_’â~•û–@.txtv‚ğíœ‚·‚é.(5•b’ö“x‚Å’â~)"
+Set objFile1 = objFSO.OpenTextFile("Abaqusè‡ªå‹•ç›´åˆ—å®Ÿè¡Œ_åœæ­¢æ–¹æ³•.txt", 2, True)
+objFile1.WriteLine "***ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®åœæ­¢æ–¹æ³•***"
+objFile1.WriteLine " ã“ã®ãƒ•ã‚¡ã‚¤ãƒ«ã€ŒAbaqusè‡ªå‹•ç›´åˆ—å®Ÿè¡Œ_åœæ­¢æ–¹æ³•.txtã€ã‚’å‰Šé™¤ã™ã‚‹.(5ç§’ç¨‹åº¦ã§åœæ­¢)"
 objFile1.WriteLine " "
-objFile1.WriteLine "***ƒXƒNƒŠƒvƒg‚Ìg‚¢•ûiŒvZÀsj***"
-objFile1.WriteLine " 1. ƒXƒNƒŠƒvƒgƒtƒ@ƒCƒ‹‚ğ”CˆÓ‚ÌƒtƒHƒ‹ƒ_[‚ÉƒRƒs[‚·‚é."
-objFile1.WriteLine " ƒtƒ@ƒCƒ‹–¼uAbaqus©“®’¼—ñÀs_name.vbsv"
-objFile1.WriteLine " 2. ƒXƒNƒŠƒvƒg‚ğÀs‚·‚é."
-objFile1.WriteLine " 3. u`.inpvƒtƒ@ƒCƒ‹‚ğ‚±‚ÌƒtƒHƒ‹ƒ_[‚ÉƒRƒs[‚·‚é."
-objFile1.WriteLine " 4. ŒvZ‚ªI‚í‚é‚Ü‚Å‘Ò‚Â."
-objFile1.WriteLine " 5. ŒvZ‚ªI‚í‚Á‚½‚çuFinished_`v‚ÌƒtƒHƒ‹ƒ_[‚²‚Æ©•ª‚ÌŒÂlƒtƒHƒ‹ƒ_[‚ÉˆÚ“®‚·‚é."
-objFile1.WriteLine " *** ƒXƒNƒŠƒvƒgˆ—‚Ì—¬‚ê"
-objFile1.WriteLine "   u`.inpvƒtƒ@ƒCƒ‹‚ª‚ ‚ê‚Î,u_queued_`.inpv‚Éƒtƒ@ƒCƒ‹–¼•ÏX"
-objFile1.WriteLine "	 ¨ŒvZ“Š“ü‚ğ‘Ò‚Â"
-objFile1.WriteLine "	 ¨u_queued_`.inpv‚Ì–¼‘O‡‚Éu`.inpvƒtƒ@ƒCƒ‹‚ğ–ß‚µ‚ÄŒvZ“Š“ü"
-objFile1.WriteLine "	 ¨ŒvZ‚ªI—¹‚·‚ê‚ÎuFinished_`v‚ÌƒtƒHƒ‹ƒ_‚ğì¬‚µŒ‹‰Êƒtƒ@ƒCƒ‹‚ğˆÚ“®"
-objFile1.WriteLine "		...‚±‚ÌŒJ•Ô‚µ"
-objFile1.WriteLine "	* u_queued_`.inpv‚É•ÏX‚·‚é‚±‚Æ‚Åƒtƒ@ƒCƒ‹‚ğ”F¯‚µ‚½‡‚É•À‚×‚Ä‚¢‚Ü‚·."
-objFile1.WriteLine " 	* Abaqusƒg[ƒNƒ“‚ª•s‘«‚·‚é‚ÆŒvZ“Š“ü’¼Œã‚ÉŒvZ‘Ò‚¿‚É‚È‚è‚Ü‚·."
-objFile1.WriteLine "	* ‚±‚ÌƒXƒNƒŠƒvƒg‚Ì‹@”\‚ÍCŠú‚ğ‚İ‚ÄŒvZ“Š“ü‚·‚é‚¾‚¯‚È‚Ì‚ÅC"
-objFile1.WriteLine "	* ƒXƒNƒŠƒvƒg‚ğ’â~‚µ‚Ä‚à, Abaqus‚ÌŒvZ‚ÍŒp‘±‚³‚ê‚Ü‚·."
-objFile1.WriteLine "	* inpƒtƒ@ƒCƒ‹‚ª‚È‚¢ó‘Ô‚Å‚±‚ÌƒXƒNƒŠƒvƒg‚ğÀs‚µ‚Ä‚à“Á‚É‰½‚à‹N‚«‚Ü‚¹‚ñ."
+objFile1.WriteLine "***ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ä½¿ã„æ–¹ï¼ˆè¨ˆç®—å®Ÿè¡Œï¼‰***"
+objFile1.WriteLine " 1. ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä»»æ„ã®ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹."
+objFile1.WriteLine " ãƒ•ã‚¡ã‚¤ãƒ«åã€ŒAbaqusè‡ªå‹•ç›´åˆ—å®Ÿè¡Œ_name.vbsã€"
+objFile1.WriteLine " 2. ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œã™ã‚‹."
+objFile1.WriteLine " 3. ã€Œï½.inpã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ã“ã®ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹."
+objFile1.WriteLine " 4. è¨ˆç®—ãŒçµ‚ã‚ã‚‹ã¾ã§å¾…ã¤."
+objFile1.WriteLine " 5. è¨ˆç®—ãŒçµ‚ã‚ã£ãŸã‚‰ã€ŒFinished_ï½ã€ã®ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã”ã¨è‡ªåˆ†ã®å€‹äººãƒ•ã‚©ãƒ«ãƒ€ãƒ¼ã«ç§»å‹•ã™ã‚‹."
+objFile1.WriteLine " *** ã‚¹ã‚¯ãƒªãƒ—ãƒˆå‡¦ç†ã®æµã‚Œ"
+objFile1.WriteLine "   ã€Œï½.inpã€ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚Œã°,ã€Œ_queued_ï½.inpã€ã«ãƒ•ã‚¡ã‚¤ãƒ«åå¤‰æ›´"
+objFile1.WriteLine "	 â†’è¨ˆç®—æŠ•å…¥ã‚’å¾…ã¤"
+objFile1.WriteLine "	 â†’ã€Œ_queued_ï½.inpã€ã®åå‰é †ã«ã€Œï½.inpã€ãƒ•ã‚¡ã‚¤ãƒ«ã‚’æˆ»ã—ã¦è¨ˆç®—æŠ•å…¥"
+objFile1.WriteLine "	 â†’è¨ˆç®—ãŒçµ‚äº†ã™ã‚Œã°ã€ŒFinished_ï½ã€ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’ä½œæˆã—çµæœãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç§»å‹•"
+objFile1.WriteLine "		...ã“ã®ç¹°è¿”ã—"
+objFile1.WriteLine "	* ã€Œ_queued_ï½.inpã€ã«å¤‰æ›´ã™ã‚‹ã“ã¨ã§ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èªè­˜ã—ãŸæ™‚åˆ»é †ã«ä¸¦ã¹ã¦ã„ã¾ã™."
+objFile1.WriteLine " 	* Abaqusãƒˆãƒ¼ã‚¯ãƒ³ãŒä¸è¶³ã™ã‚‹ã¨è¨ˆç®—æŠ•å…¥ç›´å¾Œã«è¨ˆç®—å¾…ã¡ã«ãªã‚Šã¾ã™."
+objFile1.WriteLine "	* ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®æ©Ÿèƒ½ã¯ï¼Œæ™‚æœŸã‚’ã¿ã¦è¨ˆç®—æŠ•å…¥ã™ã‚‹ã ã‘ãªã®ã§ï¼Œ"
+objFile1.WriteLine "	* ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’åœæ­¢ã—ã¦ã‚‚, Abaqusã®è¨ˆç®—ã¯ç¶™ç¶šã•ã‚Œã¾ã™."
+objFile1.WriteLine "	* inpãƒ•ã‚¡ã‚¤ãƒ«ãŒãªã„çŠ¶æ…‹ã§ã“ã®ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œã—ã¦ã‚‚ç‰¹ã«ä½•ã‚‚èµ·ãã¾ã›ã‚“."
 objFile1.WriteLine " "
-objFile1.WriteLine "***ƒXƒNƒŠƒvƒg‚Ìg‚¢•ûiİ’è•Òj***"
-objFile1.WriteLine " ƒXƒNƒŠƒvƒg‚ğƒXƒ^[ƒgƒAƒbƒv‚É“o˜^‚µ‚Ä‚¨‚­‚ÆCƒXƒNƒŠƒvƒg‹N“®‚ÌèŠÔ‚ªÈ‚¯‚Ü‚·D"
-objFile1.WriteLine " uabaqus anasysisv‚ÅŒvZ“Š“ü‚·‚é‚½‚ß, ‚Ç‚Ìƒo[ƒWƒ‡ƒ“‚ÅŒvZ‚³‚ê‚é‚©‚ÍC"
-objFile1.WriteLine "  ‚»‚Ì’[––‚Ìabaqus.bat‚Ìİ’è‚É‚æ‚è‚Ü‚·."
+objFile1.WriteLine "***ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®ä½¿ã„æ–¹ï¼ˆè¨­å®šç·¨ï¼‰***"
+objFile1.WriteLine " ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ã«ç™»éŒ²ã—ã¦ãŠãã¨ï¼Œã‚¹ã‚¯ãƒªãƒ—ãƒˆèµ·å‹•ã®æ‰‹é–“ãŒçœã‘ã¾ã™ï¼"
+objFile1.WriteLine " ã€Œabaqus anasysisã€ã§è¨ˆç®—æŠ•å…¥ã™ã‚‹ãŸã‚, ã©ã®ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã§è¨ˆç®—ã•ã‚Œã‚‹ã‹ã¯ï¼Œ"
+objFile1.WriteLine "  ãã®ç«¯æœ«ã®abaqus.batã®è¨­å®šã«ã‚ˆã‚Šã¾ã™."
 objFile1.WriteLine " "
 objFile1.Close
 
 Do
 
-	If objFSO.FileExists("Abaqus©“®’¼—ñÀs_’â~•û–@.txt") = False Then
-		objShell.Popup "ƒXƒNƒŠƒvƒg‚ª’â~‚µ‚Ü‚µ‚½", 4, "Abaqus©“®’¼—ñÀs"
+	If objFSO.FileExists("Abaqusè‡ªå‹•ç›´åˆ—å®Ÿè¡Œ_åœæ­¢æ–¹æ³•.txt") = False Then
+		objShell.Popup "ã‚¹ã‚¯ãƒªãƒ—ãƒˆãŒåœæ­¢ã—ã¾ã—ãŸ", 4, "Abaqusè‡ªå‹•ç›´åˆ—å®Ÿè¡Œ"
 		WScript.Quit
 	End If
 	queueLoop(objFolder)
-	WScript.sleep(1000)	 ' change the 500ms to 5000ms,that for Waiting for the .log to finish reading and writing status.
+	WScript.sleep(5000)	 ' change the 500ms to 5000ms,that for Waiting for the .log to finish reading and writing status.
 	finishLoop(objFolder)
-	WScript.sleep(1000)	'delated the for loop and change the time to 2s
+	WScript.sleep(2000)	'delated the for loop and change the time to 2s
 
     
 	executeLoop(objFolder)
 Loop
+
 
 Sub queueLoop(objFolder)
 	On Error Resume Next
@@ -94,7 +95,7 @@ Sub finishLoop(objFolder)
 End Sub
 
 Sub executeLoop(objFolder)
-	'w’èŒÂ(intThread)ŒvZ’†‚È‚çV‚½‚ÉÀs‚µ‚È‚¢
+	'æŒ‡å®šå€‹(intThread)è¨ˆç®—ä¸­ãªã‚‰æ–°ãŸã«å®Ÿè¡Œã—ãªã„
 	intI=0
 	For Each objFile1 In objFolder.Files
 		If Right(objFile1.Name, 4)=".log" Then 'change .lck to .log, to prevent .lck from appearing too slow, cause abaqus calculate 2 inp at the same time.
@@ -105,7 +106,7 @@ Sub executeLoop(objFolder)
 		Exit Sub
 	End If
 
-	'Às‚·‚é
+	'å®Ÿè¡Œã™ã‚‹
 	intJ=0
 	For Each objFile1 In objFolder.Files
 		If intJ >= intThread - intI Then
