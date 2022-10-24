@@ -102,6 +102,8 @@ else:
     for index, row in dfpc.iterrows():
         if "BRADONA" in dfpc.PC_name_CAE_License[index]:
             dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + 'Sekimoto'
+        if "36081" in dfpc.PC_name_CAE_License[index]:
+            dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + 'Rai'
         if "BRONCHI" in dfpc.PC_name_CAE_License[index]:
             dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + 'Yamada'
         if "BREEZE" in dfpc.PC_name_CAE_License[index]:
@@ -128,8 +130,6 @@ else:
             dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + '_Obaishi'
         if "BRTAEHYUNG" in dfpc.PC_name_CAE_License[index]:
             dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:10] + 'Jack.Li'
-        if "BRROU" in dfpc.PC_name_CAE_License[index]:
-            dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + 'Rai'
         if "BRONALDINHO" in dfpc.PC_name_CAE_License[index]:
             dfpc.PC_name_CAE_License[index] = dfpc.PC_name_CAE_License[index][:14] + 'T.Hashimoto'
         if "BROMINE" in dfpc.PC_name_CAE_License[index]:
