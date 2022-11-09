@@ -3,7 +3,7 @@ in = [Ra(:,1),RaSD(:,1),Rz(:,1),RzSD(:,1),Rzjis(:,1)];
 in = in';
 out = slipANN(:,1);
 out = out';
-%dataを正規化する (normalizing the data)
+%normalizing the data
 [inn,inputStr] = mapminmax(in);
 [outn,outputStr] = mapminmax(out);
 
@@ -17,7 +17,7 @@ net.divideFcn = '';                   %bug check
 
 %start train
 net = train(net,inn,outn);
-%使用训练好的网络，基于训练集的数据对BP网络进行仿真得到网络输出结果
+%Using the trained network, simulate the BP network based on the data of the training set to obtain the network output results
 answer = sim(net,inn);
 
 %normalizing 
