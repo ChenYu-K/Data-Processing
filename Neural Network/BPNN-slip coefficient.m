@@ -1,7 +1,8 @@
-%inputdata & outputdata
+
+% inputdata & outputdata (Train data)
 in = [Ra(:,1),RaSD(:,1),Rz(:,1),RzSD(:,1),Rzjis(:,1)];
 in = in';
-out = slipANN(:,1);
+out = slipANN(:,1);  % Train label
 out = out';
 %normalizing the data
 [inn,inputStr] = mapminmax(in);
