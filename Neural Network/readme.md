@@ -2,6 +2,7 @@
 
 # BPNN (Matlab, Pytorch)
 BackPropagation Neural Network (BPNN)
+![](./fig/nnwork.png)
 
 ## Train phase
 Input: parameter (number) and Turelabel (Predictive value)
