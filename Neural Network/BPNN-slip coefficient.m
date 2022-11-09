@@ -10,7 +10,7 @@ out = out';
 %make a BP neural network
 net = newff(inn,outn,[5,3,1],{'purelin','logsig','purelin'});
 net.trainParam.show = 1;             %10.time get resoult back
-net.trainParam.epochs = 10000;         %the max train time
+net.trainParam.epochs = 1000;         %the max train time (epochs)
 net.trainParam.lr = 0.05;             %net learing rate
 net.trainParam.goal = 0.065*10^(-3);  %target deviation
 net.divideFcn = '';                   %bug check
