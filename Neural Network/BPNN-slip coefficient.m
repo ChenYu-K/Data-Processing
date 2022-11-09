@@ -34,7 +34,7 @@ xlabel('Ra'); ylabel('slip coefiicient');
 title('compare the test and ANN');
 grid on;
 
-%new data
+%new data (test nn work)
 newinput = [22.36935;6.509416727;107.28235;23.64338718;74.429];
 newinput = mapminmax('apply',newinput,inputStr); %normalizing
 newoutput = sim(net,newinput);
