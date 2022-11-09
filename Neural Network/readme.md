@@ -6,3 +6,5 @@
 Use Resnet and Obeject detective to check the bolt axial force and bolt head.
 
 ![cnn](./fig/boltcnn.png)
+
+![](./fig/rescnn_bolt.png)
