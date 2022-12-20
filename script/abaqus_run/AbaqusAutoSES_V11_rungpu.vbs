@@ -57,13 +57,13 @@ Do
 		WScript.Quit
 	End If
 	queueLoop(objFolder)
-	WScript.sleep(5000)	 ' change the 500ms to 10000ms,that for Waiting for the .log to finish reading and writing status.
+	WScript.sleep(5000)	 ' change the 500ms to 5000ms,that for Waiting for the .log to finish reading and writing status.
 	finishLoop(objFolder)
-	WScript.sleep(5000)	'delated the for loop and change the time to 2s
+	WScript.sleep(2000)	'delated the for loop and change the time to 2s
 
     
 	executeLoop(objFolder)
-	WScript.sleep(40000)
+	WScript.sleep(50000)
 Loop
 
 Sub queueLoop(objFolder)
@@ -71,7 +71,7 @@ Sub queueLoop(objFolder)
 	For Each objFile1 In objFolder.Files
 		If Right(objFile1.Name, 4)=".inp" and Left(objFile1.Name, 8)<>"_queued_" and objFSO.FileExists(Replace(objFile1.Name, ".inp", ".log")) = False Then
 			objFSO.MoveFile objFile1, objFile1.ParentFolder & "\_queued_" & Year(Now) & right("0" & Month(Now), 2) & right("0" & Day(Now), 2) & "_" & right("0" & Hour(Now), 2) & right("0" & Minute(Now), 2) & right("0" & Second(Now), 2) & "_" &  objFile1.Name
-			WScript.sleep(1000)
+			WScript.sleep(1000) 'add 1s wait
 		End If
 	Next
 End Sub
