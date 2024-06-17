@@ -1,0 +1,209 @@
+\documentclass{proc-a4}
+\usepackage{multirow}
+%\usepackage[margin]{subcaption} %ここではいらないと思う
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{latexsym }
+\usepackage{array}
+\usepackage{booktabs}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}} %centring figure in table
+\usepackage[sort&compress,authoryear,sectionbib]{natbib}
+\bibliographystyle{chicago}
+\usepackage[colorlinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{makecell}
+%\usepackage{Chicaco}
+\usepackage[sort&compress,authoryear,sectionbib]{natbib}
+\usepackage{color,soul}
+\usepackage{subfigure}
+\begin{document}
+\usepackage{multirow}    % セル結合用
+\usepackage{tabularx}  
+\author{K. Akahoshi, G. Hayashi, Y. Chen, T. Yamaguchi}
+
+\aff{Department of Civil Engineering, Osaka Metropolitan University, Osaka, Japan}
+
+\abstract{Identifying the number and location of damage is an important issue in the vibration health monitoring of bridges. This study aimed to improve the accuracy of damage detection using the natural frequencies utilized in conventional monitoring and the rotational angle of the bridge in the transverse direction. An analytical model was constructed based on a reduced arch model developed by the laboratory group. Damage in the hanger members, stiffening girders, and cross girders of the analytical model was investigated with reference to the corrosion reported for real arch bridges. Two selections were obtained from this damage, and the damage was modeled. Eigenvalue and static analyses were then carried out to investigate the accuracy of damage type and damage location detection based on the natural frequency and rotation displacement changes caused by each damage pattern. The results showed that the natural frequencies of damage at the location where the mode shape is predominant change significantly, and that the natural frequencies that change for each damaged member are different. It was also found that the damage that could not be identified by natural frequencies alone could be detected using the angle of rotation. These results indicate the possibility of classifying damage locations and types when there is more than one type of damage.}
+
+%\keywords{keyword text}
+
+\chapter{Damage identification of corroded arch bridge using vibration characteristics and rotational angle}
+
+\section{Introduction}
+In Japan, the number of bridges significantly increased during the periods of high economic growth. Consequently, the number of bridges that are 50 or more years is increasing rapidly. Therefore, it is important that these bridges be inspected and repaired. The current inspection methods are mainly visual inspections that require engineers to visit the site. This method is inefficient, and the inspection results are subjective. Therefore, structural health monitoring has attracted attention as an alternative to visual inspection. In particular, vibration-based structural health monitoring (VSHM) is being utilized because the damage and deterioration that are difficult to observe are more likely to appear in vibration characteristics. Once a damage detection method for vibration health monitoring is established, the damage can be detected simply by installing sensors on-site and analyzing the data obtained. Therefore, many studies are being undertaken from various perspectives to improve the accuracy of vibration health monitoring.\\\noindent
+
+\noindent Numerous parameters are currently being considered for damage detection. For example,\citep{sekiya} studied the displacement as a bridge response, whereas \citep{kim} used mode shapes and natural frequencies to determine the amount of change in values when a real bridge is damaged. \citep{gensui} proposed a damping-based damage detection method. \citep{paramater} compared the most detectable energy-based parameters. More recently, parameter identification procedures have been black-boxed and anomaly detection based on acceleration waveforms has also been performed \citep{2020},\citep{2022}. Although all the parameters have the potential to detect damage, the relationship between the parameters and damage has not been clarified. In this study, the goal was to detect multiple damages. \citep{Lee} stated that by placing sensors at the damage location, it is possible to detect multiple damages without prior data. However, the possibility of detection depends on the location of the sensor. Therefore, in this study, a single measurement position was selected, and the effect of damage on the overall response of the bridge was investigated. Based on the above, the parameters that have the potential for multiple damage detection were selected after confirming the effect of each damage on the parameters, and the possibility of detecting them was shown.\\\noindent
+
+\noindent The studied bridges were arch bridges. Examples of arch bridge accidents include the Nanfangao Straddling Port Bridge collapse in Taiwan in 2019, and the Rokujutani Water Environment collapse in Japan in 2021. Both were caused by corrosion and rupture of the hangers. Although many studies have been conducted on arch bridges \citep{arch1},\citep{arch2}, the effects of damage at each position of each member have not been clarified. Therefore, this study clarified the effects of damage on the parameters based on the FEM analysis of a steel arch bridge model and showed the possibility of multiple damage detection.
+
+\section{FEM Analysis}
+
+\subsection{Subject bridge}
+Figure 1 shows the overall view of the bridge model and the number of the damage to be considered (member name + 'a' or 'b' side + damage number). The damage is described in detail in Section 2.4. The model is a 1/15 scale model of a 750 m long Langer arch bridge. The model bridge is a steel arch bridge with a total length of 5000 mm, width of 567 mm, and height of 893 mm. The bridge is composed of arch ribs, stiffening girders, cross girders, hangers, and gusset plates. The steel used was SS400 (JIS G 3101). The mechanical properties are listed in Table 1. The suspension members and arch ribs were connected to the stiffening girders with M10 bolts via gusset plates. The cross-sectional shapes of the members are presented in Table 2. 
+  \begin{figure}
+\centering
+\subfigure[elevation view]{
+    \begin{minipage}[t]{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/zu-1.2.png}
+    \end{minipage}}
+\subfigure[bottom plan view]{ 
+    \begin{minipage}[t]{0.68\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/zu-1.3.png}
+    \end{minipage}}
+    \caption{The relationship between prediction data and label data}
+    \label{fig-predicdata}
+\end{figure}
+\begin{table}[ht]
+\processtable{Analysis case}{
+  \begin{tabular}{m{20mm}m{20mm}m{20mm}m{20mm}m{20mm}m{20mm}}
+   \hline
+   \multirow{4}{*}{Symbol of grade} & \multicolumn{4}{c}{Yield point or yield strength (N/mm2)}&  \multirow{4}{*}{Tensile strength(N/mm2)}\\
+   &\multicolumn{4}{c}{Thickness of steel product (mm)}&\\
+
+   &16 or under&Over 16 up to and incl.40&Over 40 up to and incl.100&Over 100&\\
+   \hline \hline
+   \specialrule{0em}{2pt}{2pt}
+   SS400&205 min.&195 min.&175 min.&106 min.&330 to 430\\
+   \hline
+  \end{tabular}}{}
+\end{table}
+
+\begin{table}[ht]
+\processtable{Member dimensions}{
+\begin{tabular}{@{}lcM{40mm}@{}}\toprule
+  Element&Size(A$\times$B$\times$t$\times$L)[mm]&\\
+  \hline\hline
+  \specialrule{0em}{2pt}{2pt} %transparent line
+  Stiffening girder&40$\times$40$\times$1.6$\times$5000&
+  \multirow{3}{*}{\begin{minipage}{40mm}
+        \centering
+        \scalebox{0.4}{\includegraphics{fig/hyou21.jpg}}
+        \end{minipage}}\\
+    &&\\
+  Arch rib&40$\times$40$\times$2.0$\times$5000&\\
+  &&\\
+  Cross girder&30$\times$30$\times$1.6$\times$487&\\
+  \specialrule{0em}{2pt}{2pt}
+  \hline
+  \specialrule{0em}{2pt}{2pt}
+  \multirow{2}{*}{Hanger}&
+  \multirow{2}{*}{16(A)$\times$4.5(t)}&
+   \hfil\multirow{2}{*}{\begin{minipage}{40mm}\centering
+    \scalebox{0.2}{\includegraphics{fig/hyou22.jpg}}
+    \end{minipage}}\\
+    &&\\
+    \specialrule{0em}{2pt}{2pt}
+    \hline  
+    &&\\
+    \multirow{3}{*}{Gusset}&
+    \multirow{3}{*}{t=3}&
+    \multirow{3}{*}{\begin{minipage}{40mm}\centering
+     \scalebox{0.4}{\includegraphics{fig/hyou23.jpg}}
+    \end{minipage}}\\
+    &&\\
+    &&\\
+    \specialrule{0em}{8pt}{8pt}
+   \bottomrule
+ \end{tabular}}{}
+\end{table}
+
+\subsection{Analysis Model}
+In this study, to perform damage detection using a simplified model, the entire arch bridge was modeled as a beam element. Figure 2 shows a general view of the analytical model. Each number corresponds to the damage number in Damage Figure-1. The finite analysis software Abaqus/Standard 2022 was used. The overall stiffness was 200000 N/mm², Poisson's ratio was 0.3, density was 77 kN/m³, and total weight was 65 kg. The gusset plates of the suspension members were represented by increasing the cross section of the beam elements in that area. The stiffness was modified such that the gussets connecting the stiffening girders and arch ribs were taken into account. The gusseted girders were rigidly connected to each other by gusset welds; therefore, the entire bridge was considered to be a single member in the analytical model. In this model, the arch ribs and stiffening girders were divided into 250 sections, the transverse girders into 30 sections, the suspension members into 20 to 40 sections depending on their length, and the damaged sections into 3 sections. The boundary conditions were roller supports at two of the four corners and pin supports at the remaining corners. In Figure 2, the boundary condition is shown only at a point in the foreground.
+ \begin{figure}[htbp]
+            \centering
+            \includegraphics[width=0.8\linewidth]{fig/zu2.jpg}
+            \caption{analysis model}
+    \end{figure} \\
+
+\subsection{Analysis Outline}
+Eigenvalue and static analyses were performed. Eigenvalue analysis was performed at the maximum frequency of 100 Hz. For static analysis, a concentrated load of 20 kg was applied. The positions and directions are shown in Figure 2.
+
+\subsection{Parameters}
+The rotational angle (rotational displacement in the analysis) and natural frequencies, which can be measured with a quartz triaxial accelerometer, were selected as those that can be easily measured on an actual bridge. The measurement points in the analysis were the loading positions shown in Figure 2. As shown in Figure 2, there are rotational displacements in the x-, y-, and z-directions, clockwise about the axes. The natural frequencies of the modes could be measured up to the third bending mode.
+\subsection{Damages}
+The damage was assumed to be localized corrosion of the hanger and internal corrosion at each point of the cross girder and stiffening girder. In these places, the damage is difficult to confirm, in accordance with the report on the falling-arch bridge accident mentioned earlier and the periodic inspection guidelines for road bridges. Figure 1 shows the damage locations and numbers. Each damage was modeled by making the cross section of the damaged section deficient. Damage levels consisting of 25\%, 50\%, and 75\% reductions in the plate thickness were assumed. The analysis cases are listed in Table 4. First, three analyses were conducted for each of the three damage levels, as shown in Figure 1, for a single damage location. Next, 10 locations were selected such that each member had three or four damage levels, and two damage levels were selected from the 10 locations. The degree of damage was set to nine levels such that each member had three levels of damage.
+\begin{table}[ht]
+\processtable{Analysis case}{
+\begin{tabular*}{300pt}{@{\extracolsep\fill}lllllll@{}}\toprule
+&Damge type&combination&degree& case\\\midrule
+Singledamage&60&60&3&180\\
+\multirow{3}{*}{Double damage}&\multirow{3}{*}{10}&\multirow{3}{*}{10*9=72}&Damage1:3&\multirow{3}{*}{648}\\
+&&&Damage2:3&\\
+&&&3*3=9&\\\botrule
+\end{tabular*}}{}
+\end{table}
+\section{Analysis Results}
+To determine the effect of each damage on the parameters, we first considered the case of a single damage.
+\subsection{Natural frequency}
+Figure 3 shows the horizontal and bending mode shapes obtained from this analysis. Although the mode shapes were not used as parameters, a comparison of the natural frequencies showed that they are based on mode shapes. We obtained the first and second horizontal modes, first and second torsional modes, and first, second, and third bending modes, with the third bending mode as the maximum frequency. Next, considering the change in natural frequencies when each type of damage occurs, it was found that for each member, there was a natural frequency that tended to change when the member was damaged. The horizontal girders had first and second horizontal modes, and the hangers had first and second bending modes. No independent natural frequencies were observed for the stiffening girders; however, the bending mode showed a greater change than that in the other members.\\
+Figure 4 shows the change in natural frequencies of the (a) first horizontal mode, (b) second horizontal mode, (c) first bending mode, (d) second bending mode, and (e) third bending mode when each damage occurred. The horizontal axis represents the damage number shown in Figure 1 and 2, which indicates the location of the damage. The plot line is different for each damaged member, and the color of each member is shown in the legend. The vertical axis represents the difference in vibration frequencies between the healthy and damaged members. First, as shown in (a), we can see that the change is larger when the cross-girder is damaged. Damage numbers 0 and 8 are particularly significant, and the mode shape is that of the girder with 0 and 8 as nodes, indicating that the oscillation in this mode depends significantly on the stiffness of the girder. The mode shapes of the girders at other damage numbers also changed more than those of the other members. Overall, the contribution of transverse girders to this mode was high. Similarly, as shown in (b), the dominant position is different from that of the first mode, and the damage numbers 1, 2, 6, and 7 are dominant. In the second bending mode shown in (c), the hanger mode is dominant in both the upper and lower modes. Damage number 4 is dominant, but the mode shape shows that the node is located at the center of the span. This mode is highly dependent on the stiffness of the suspension. As shown in (d), the change in the mode shape is also significant when the hanger is damaged, but the effect of the damage to the stiffening girder is slight. As shown in (e), the change in both the stiffening girder and hanger is significant, but the mode shape oscillates when the dominant part is a node. \\
+From the above, it can be said that each member has a dominant mode and the change is the greatest at the nodal point. In addition, because there are two dominant frequencies for the cross girder and hanger, and because the dominant feature values are opposite, the two frequencies can be used together to facilitate classification. In terms of damage detection, it is possible to determine the damaged member; however, considering the symmetry and the fact that the values are the same on the a and b sides, other indices are necessary.
+ \begin{figure}
+            \centering
+            \includegraphics[width=0.8\linewidth]{fig/zu3.png}
+            \vspace*{-12pt}
+            \caption{Mode shapes}
+    \end{figure} \\
+     \begin{figure}
+            \centering
+            \includegraphics[width=0.85\linewidth]{fig/zu4.png}
+            \vspace*{-18pt}
+            \caption{Relationship between damaged areas and natural frequencies.}
+    \end{figure} 
+\subsection{Rotational displacement}
+Similarly, Figure 5 shows a comparison of the rotational displacement values along the vertical axes. The x-, y-, and z-axes are used as the centers of rotation in (a), (b), and (c), respectively. As shown in (a), the difference between the a and b sides, which did not appear in the other parameters, is evident. This is because the center rotates in the direction of the damage. The rotation angle in the x-direction coincides with the change in displacement, indicating that the rotation angle also increases as the load-bearing capacity decreases. As depicted in (b), the differences between the left and right sides and between the a and b sides are significant. The reason for the large difference between the left and right sides of the stiffening girders is considered to be the roller support provided to stiffening girder number 8, which reduces the damage effect. The large influence of the hanger, which rotates in the opposite direction of the corrosion, is shown in (c). The z-axis can be used to distinguish between the left and right sides. The above results indicate that the rotational displacement is used to determine whether the damage is in the degree position, because it is tilted toward the direction of the damage. Rotational displacement can be used as an indicator to determine the position of the damage level.
+\begin{figure}
+            \centering
+            \includegraphics[width=1\linewidth]{fig/zu5.png}
+            \caption{Rotational displacements obtained from static analysis}
+    \end{figure} \\
+\subsection{Difference by damage level}
+Figure 6 shows the rotation angle and natural frequency parameters, which are the most likely to detect damage, for three different degrees of damage. Part (a) of the figure shows a three-dimensional space in which the dominant mode for each material is selected. Because a and b on the left and right sides, respectively, have the same values, only the damage from (a) to (d) on the a side is considered. Because there is little difference between the top and bottom of the suspension, only damage on the bottom side is represented. The values for different damage levels are plotted as $\bigcirc$-25\%, $\Box$-50\%, and $\bigtriangleup$-75\%, and a straight line connecting the 75\% damage level and the healthy level is also drawn. The damage numbers are shown in Figure 6. The change in the degree of damage appears almost on a straight line.\\
+However, a closer look reveals that this change appears on a curve that is very close to a straight line. When the thickness of the plate at the time of the Ha3 damage, which is a large change, varies as shown in Figure 7, the change in value appears in the form of a certain curve. Considering the equation of motion, the natural frequency can be expressed as the square root of stiffness and mass. When the damaged stiffness changes in stages, the natural frequency can be expressed as a function of stiffness. Therefore, the change in the damage phase can be considered to be quadratic. \\The damage under the stiffening girder and suspension in triaxial space with rotational displacements of x, y, and z is plotted in (b). The damage appears almost on a straight line, but when we look at the details, we can see that it is a function of stiffness. The damage appears almost as a straight line, but a closer inspection reveals that it is curved. This may be due to the fact that the deflection angle is inversely proportional to the stiffness and the cross-sectional secondary moment. From these results, it is possible to predict other values if some degrees are known.
+\begin{figure}
+\centering %centering でいい
+\begin{minipage}[t]{0.58\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fig/zu-6.jpg}
+    \caption{Parameter changes due to different degrees of damage}
+\end{minipage}
+\begin{minipage}[t]{0.38\textwidth}       
+    \includegraphics[width=\linewidth]{fig/zu7.png}
+     \caption{Difference in frequency for small changes in the cross section of Ha3}
+\end{minipage}
+\end{figure} 
+
+\subsection{Multiple damage}
+\begin{figure}
+            \centering
+            \includegraphics[width=1\linewidth]{fig/zu8.png}
+            \caption{Multiple damage using two natural frequencies}
+    \end{figure} 
+    \begin{figure}
+            \centering
+            \includegraphics[width=0.4\linewidth]{fig/zu9.png}
+            \caption{Multiple damage using three natural frequencies}
+    \end{figure} 
+
+The change in the values in the case of multiple damages was considered. The dominant frequencies in each member are considered to be the second horizontal mode, the first bending mode, and the third bending mode. As shown in Figure 8(a), the horizontal axis is the second horizontal mode and the vertical axis is the second bending mode; as depicted in (b), the horizontal axis is the first bending mode and the vertical axis is the third bending mode; and, as shown in (c), the horizontal axis is the second bending mode and the vertical axis is the third bending mode. The color of each plot depends on the combination of members, as shown in the legend. For example, the red circles represent damage to the stiffening girder, which indicates that the damage can be plotted as a single overlaid damage, and that there is cohesiveness among the damaged components. Damage that is difficult to classify in (a) can be classified to a certain extent in (b) and (c). However, as shown in Figure 4, it is difficult to distinguish stiffening girders from hangers.\\
+Based on the above, multiple damage values are plotted in a three-dimensional space with three modes along the axes (Figure 9), where the x-axis represents the second horizontal mode, the y-axis represents the first bending mode, and the z-axis represents the third bending mode. The colors of the plots are different for each combination of members, as shown in Figure 8. This figure shows that the damage is grouped by color, and that it is possible to distinguish the damaged components. In addition, for each damage combination, a plane appears on which the curves described in Section 3.3 are added, and the different damage stages are indicated on the plane. By looking at the plotted locations, it is possible to understand the damaged member and location of the damage to some extent.\\
+By examining these planes and plotted locations, the damaged member and location of the damage can be determined to some extent. Furthermore, the location of the damage within the same member can be determined more accurately by comparing the values of the two dominant frequencies for each member, as described in Section 3.1. Furthermore, as described in Section 3.1.4, the rotational displacement can be used to identify damage on the left or right side, or on the a or b side. The combination of rotational displacement and natural frequency can be used for more accurate damage detection for stiffening girders and damage locations that are difficult to detect on only one side of the girder, and it is also possible to determine whether the damage is single or multiple. For example, if the eigenvalues are calculated in advance using an analytical model, the location of the damaged member can be plotted in space, as shown in Figure 10, and the detailed location can be found by examining the two frequencies and rotational displacements at which the damaged member is dominant.
+
+\section{Conclusion}
+In this study, we confirmed how the damaged member and its location affect the parameters for damage detection and then examined how the parameters should be appropriately used for multiple damage detection. The conclusions are as follows.\\\noindent
+
+\noindent(1) The influence of each damage on displacement and natural frequency is based on its shape, and the nodal point is dominant in taking that shape. Thus, there is a dominant mode in the natural frequency for each member.\\\noindent
+
+\noindent(2) As certain curves appear when the degree of damage is varied, it is possible to predict the values for other degrees of damage if some values are obtained in advance.\\\noindent
+
+\noindent(3) The damaged member can be identified based on the significant change in natural frequency, and its location can be determined from the natural frequency and rotation angle that prevail when the member is damaged. Using this method, there is a possibility of multiple damage detection.\\\noindent
+
+\noindent Additional issues include determining the actual number of damages that can be detected using machine learning, and to what extent the trends in this study will be apparent when the actual values are measured. In addition, damage detection requires the prediction of the values in advance, and the model must be effectively updated to predict the values with good accuracy.
+
+\bibliography{reference}
+\end{document}
+

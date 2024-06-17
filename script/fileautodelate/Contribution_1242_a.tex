@@ -1,0 +1,359 @@
+\documentclass{proc-a4}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+\usepackage{flushend}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+%\usepackage{Chicaco}
+\usepackage[sort&compress,authoryear,sectionbib]{natbib}
+\bibliographystyle{chicago}
+\usepackage{color,soul}
+\usepackage{subfigure}
+
+%the maximum number of pages per full paper is 8 pages for regular contributions
+
+%\usepackage[authordate]{biblatex-chicago}
+% \usepackage[colorlinks]{hyperref}
+% \hypersetup
+%     {
+%     colorlinks=true,
+%     linkcolor=black,
+%     filecolor=magenta,      
+%     urlcolor=black,
+%     linkbordercolor=0 0 0,
+%     pdftitle={IALCCE2023-boltChenYu},
+%     final
+%     }
+
+\usepackage[backref]{hyperref} 
+\hypersetup{
+hidelinks
+}
+
+\begin{document}
+
+\author{Y. Chen*, J. Lai, G. Hayashi, T. Yamaguchi}
+
+\aff{Osaka Metropolitan University, Osaka, Japan}
+
+
+\abstract{Quite a few High-strength bolt axial force of in-service bridges was found to decrease by 10-20\% from the design bolt axial force by the previous study.   One of the reasons is that the bolts are not tensioned to the design axial force due to various difficult construction conditions and construction errors. It is important to control the axial force correctly when fastening bolts. Previous studies use contact methods such as ultrasonic testing, eddy currents to detect the bolt axial force. This paper proposes a non‐contact vision-based bolt axial force detection method using deep learning. We focused on the relative deformation feature of the bolt head inscriptions and trained the neural network by regression method. The training results indicated that even when the image size was reduced to 448 pixels it was able to obtain correct results for axial force detection, but hard to detect the axial force with different bolts.}
+
+\keywords{bolt axial force, deep learning, convolutional neural network, bridge}
+
+\chapter{Bolt axial force detection using Deep learning based on vision methods}
+
+
+\section{Introduction}
+
+High-strength bolted friction joints (hereafter referred to as friction joints) are often used in the field joints of steel bridges \citep{AASHTO2020, douji2017, eurocode3}.  \citep{Iida2021} investigated the residual axial force of high-strength bolts after frictional bolted joints have been in service for several years. The results showed that the residual axial force of many bolts was 10–20\% lower than the design axial force, irrespective of the service life of the friction joints and erection conditions of the steel bridges. This disparity was attributed to variations in the torque coefficients of bolts in situ joints and difficulties in controlling the construction quality \citep{Iida2021, Iida2022}.
+
+Given that the residual bolt axial force may be lower than the designed axial force owing to limited control of the axial force during fastening, it is crucial to ensure the appropriate bolt axial force in the initial stage. 
+
+Among the contact methods to detect the bolt axial force, \citep{Toh2019DeterminationProcess} a prior study developed a novel method to measure axial force by using the vibration of bolts. \citep{Akutsu2022AdvancementBoltsb} proposed an axial force evaluation method using eddy current. Further, \citep{Hirao2022ProposalProcessing} proposed an ultrasonic bolt axial force evaluation method using machine learning based on characteristic signals to detect the bolt axial force . However, considering the construction conditions in situ, determining the axial force using an axial force meter (ultrasonic or load cell type) or percussion test on-site would be difficult (For example, usually construction on-site in aerial work platform). Considering the current aging population and decreasing number of engineers, developing a non-contact method to control bolt axial forces is necessary.
+
+Bolt head photographs and convolutional neural networks (hereafter CNNs) are possible methods for non-contact axial force control and have been examined by researchers worldwide since 2012. \citep{Ramana2019FullyAlgorithm, Huynh2019Quasi-autonomousProcessing} proposed CNN-based methods for determining if a bolt is tight based on the bolt diameter and exposed shaft length. \citep{Zhao2019BoltLearning} studied the effects of the way bolt head photographs used as training data for a CNN are taken (angle and exposure ) on the recognition rate. The above results have a high potential for application in controlling bolt tension using photographs of the bolt heads, and CNNs are believed to contribute to the management of bolt axial forces in situ.
+
+Recognition of bolts generally uses the shape of the bolt as a feature quantity for classification analysis, and there is not much requirement for the accuracy of the image. This study proposed a methods that aims to extract the relative deformation of bolt head inscriptions to detect bolt axial force by train the neural network with regression. Because of the need to observe small deformations, the size of the images may be more demanding. We investigated the possibility of managing bolt axial forces based on photographs of bolt heads by using CNNs and high-strength hexagonal bolts.  Additionally, we investigated the practicality of the method by adapting the specifications, such as the brightness, DPI, and focal length , of the photographs fully to an in situ construction environment.
+
+\section{Experiment}
+
+\subsection{Set up}
+
+Figure-\ref{fig-setup} shows that a 500 kN hydraulic jack (hand pump) was used to apply the bolt axial force, while a load cell and data logger (TDS-630) were used to measure the true bolt axial force, which was recorded in the computer. Simultaneously, the bolt head picture was taken by a digital single-lens reflex camera (Sony $\alpha$1). Both the camera and data logger were set to record (take pictures) data at 2 s. Table-\ref{tab-device} shows the detailed settings of the device.
+
+\begin{table}[htbp]
+\processtable{Device and parameter settings}{
+%\begin{tabular}{@{}ll@{}}
+\begin{tabular*}{260pt}{@{\extracolsep\fill}ll@{}}
+\toprule
+Name & Parameter \\\midrule
+Data Logger             & TDS-630 \\
+Measurement interval    & 2 s \\
+Load speed              & 2 kN / 1 s \\
+Camera                  & Sony \rm $\alpha 1$             \\ 
+Lens                    & FE 24-70 mm F2.8 GM II               \\
+F-stop                  & f/2.8             \\
+Exposure time           & 1/80 s               \\
+ISO                     & 200 \\
+Focal length            & 70 mm                  \\ 
+Resolution              & 350 DPI \\ \bottomrule
+\label{tab-device}
+\end{tabular*}}{}
+
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{pic/step-1.jpg}
+    \caption{Experimental setup to measure actual bolt axial force and record the picture of bolt head}
+    \label{fig-setup}
+\end{figure}
+
+
+\subsection{Dataset and case}
+Considering the different surface properties of each bolt, 12 bolts were prepared for this study. We took 200 pictures of each bolt and augmented them to 1,000. A picture was taken at 5 kN intervals, and when the load reached approximately 106 kN, the bolts were unloaded to 10 kN . \\
+Owing to the different traits of the bolt head surface, two series of cases were established in this study to discuss the qualities needed to detect the bolt axial forces. To discuss the effects of the input image size on the training accuracy, the image size was set as a parameter as shown in Table-\ref{tab-case}.\\
+The valid dataset has a similar experiment environment as the training data and uses similar bolt series, while the test dataset uses completely different bolts and experiments at the real bolted joint.\\
+
+
+\begin{table}[htbp]
+\processtable{Discussion case and its  parameters.}{
+\begin{tabular}{@{}lccccc@{}}
+%\begin{tabular*}{260pt}{@{\extracolsep\fill}lllll@{}}
+\toprule
+\multirow{2}{*}{Series} & \multirow{2}{*}{\makecell[c]{Total number \\ of  bolt}} & \multirow{2}{*}{Inputsize} & \multicolumn{3}{l}{Number of input picture} \\ \cmidrule(l){4-6} 
+ & & & Train & Valid & Test \\ \midrule
+ One-bolt & 1 &\makecell[c]{1120 $\times$ 1120 \\ 672 $\times$ 672} & 1600 & 400 & 400 \\
+ Multi-bolt & 12 &\makecell[c]{448 $\times$ 448\\ 224 $\times$ 224}  & 8000 & 2000 & 2000 \\ \bottomrule
+ \label{tab-case}
+\end{tabular}}{}
+\end{table}
+
+\subsection{Hardware and software configurations}
+Training deep learning networks (especially using high-resolution images) requires ample computing power. A Dell 7910 workstation was used for training the model. The workstation featured an Nvidia RTX A4000 (with 16 GB of RAM) and 256 GB of RAM. The model training was based on Pytorch, CUDA, and cuDNN.
+
+\section{Convolutional Neural Network}
+
+As is known, the deeper a neural network is, the harder it is to train. Deeper networks can cause vanishing and exploding gradient problems. To avoid such problems,  we used ResNet-50 in this study \citep{resnet2016} as the base framework for the network architecture. This framework introduced a residual block that could skip some layers to connect the activations of one layer to other layers as expressed in $\mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_i\right\}\right)+\mathbf{x}$.  As shown in Figure-\ref{fig-resfw}, the output of the network used logistic regression analysis, wherein the output class was 1 for the speculative axial force of the bolt. The loss function (MSEloss) and sigmoid function were used in the output regression layer.  Stochastic gradient descent (SGD) was used in the optimizer. The hyperparameters of the optimizer and dropout layer are shown in Table-\ref{tab-hyperpar}.
+
+When high-strength bolts received axial force, bolts head deforms to concave shape, and the relative positions of bolt head inscriptions also changed. Input images was converted from 24-bit color to 8-bit grayscale, and read the grayscale values matrix.Convolution layer was used to extract the feature of bolt head grayscale matrix, and use convolution kernel (Filter) as a bias ($W_i$). And the extracted data is processed by pooling layer to do maximum or average processing as shown in Figure-\ref{fig-fig2nn}. The training is finally completed by iteratively computing the feature values to obtain the best bias.
+
+% \begin{equation}
+% \mathbf{y}=\mathcal{F}\left(\mathbf{x},\left\{W_i\right\}\right)+\mathbf{x}
+% \label{eqa-resnet}
+% \end{equation}
+% Here x and y are the input and output vectors of the layers considered. The function $\mathcal{F}(\mathbf{x},{W_i})$ represents the residual mapping to be learned.
+
+\begin{table}[htbp]
+\processtable{Hyperparameters of training.}{
+%\begin{tabular}{@{}ll@{}}
+\begin{tabular*}{200pt}{@{\extracolsep\fill}lc@{}}
+\toprule
+Hyperparameters     & Value             \\ \midrule
+Opimizer            & SGD               \\
+Learing rate        & 0.001             \\
+Momentum            & 0.9               \\
+Dropout             & 0, 0.25, 0.5, 0.8 \\
+Loss Function       & MSELoss                  \\ 
+Full Connection Layer & 1, 2, 3 \\ 
+Epoch        & 500  \\ \bottomrule
+\end{tabular*}}{}
+\label{tab-hyperpar}
+\end{table}
+
+
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.45\textwidth]{pic/resblock.pdf}
+%     \caption{Residual building block}
+%     \label{fig-resblock}
+% \end{figure}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\textwidth]{pic/resfw.pdf}
+    \caption{CNN architecture Based on ResNet50, And the residual block}
+    \label{fig-resfw}
+\end{figure*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=\textwidth]{pic/fig2nn.pdf}
+    \caption{Extraction of bolt head features and setting of bias}
+    \label{fig-fig2nn}
+\end{figure*}
+
+
+
+\section{Data Preprocessing}
+
+\subsection{Data Augmentation}
+
+The original input images were randomly augmented nine times using one of the following augmentation algorithms: additive Gaussian noise, add (adds a value to all pixels in an image), multiply (multiplies all pixels in an image using a specific value), edge detection (detects all edges in an image), contrast normalization, and sharpen.  Figure \ref{fig-inpaug} shows the original input image and that augmented using the additive Gaussian noise and sharpen algorithms.
+
+\subsection{Transformer}
+All the images were treated using grayscale processing, so the input layer of the network was set to 1. To study the effect of the image size on the prediction accuracy, the input images were resized to 1,120 ($0.029 mm/pixel$), 672 ($0.048 mm/pixel$), 448 ($0.073 mm/pixel$), and 224 ($0.15 mm/pixel$) pixel. 
+
+\begin{figure*}
+\centering
+\subfigure[Original grayscale picture -bolt1]{
+    \begin{minipage}[t]{0.18\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{pic/bolt.jpg}
+        \end{minipage}}
+\subfigure[ Augmented picture -bolt1]{
+    \begin{minipage}[t]{0.18\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{pic/bolt_aug.jpg}
+        \end{minipage}}
+\subfigure[Original grayscale picture -bolt2]{
+    \begin{minipage}[t]{0.18\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{pic/bolt2.jpg}
+        \end{minipage}}
+\subfigure[Original grayscale picture -bolt3]{
+    \begin{minipage}[t]{0.18\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{pic/bolt3.jpg}
+        \end{minipage}}
+\subfigure[Original grayscale picture -bolt4]{
+    \begin{minipage}[t]{0.18\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{pic/bolt4.jpg}
+        \end{minipage}}
+    \caption{Input picture (Augmented using additive Gaussian noise, sharpening)}
+    \label{fig-inpaug}
+\end{figure*}
+
+
+
+\section{Results}
+
+\subsection{Performance measures}
+
+ In this study, we used the mean squared error (MSE), root mean squared logarithmic error (RMSE), mean absolute error (MAE), and coefficient of determination ($R^2$) to evaluate the regression model.
+ 
+The MSE  represents the average of the squared difference between the original and predicted values in the data set. It is used to measure the variance of the residuals.
+
+% \begin{tabular}{lrclr}
+% \centering
+% $
+% \mathrm{MSE}=\frac{1}{N} \sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2
+% $
+% &(1)&
+% $
+% \mathrm{RMSE}=\sqrt{\frac{1}{N} \sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2}
+% $&(2)\\
+% $\mathrm{MAE}=\frac{1}{N} \sum_{i=1}^N\left|y_i-\hat{y}_i\right|$&(3)& 
+% $R^2=1-\frac{\sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2}{\sum_{i=1}^N\left(y_i-\bar{y}\right)^2}$&(4)\\
+% \end{tabular}
+
+\begin{equation}
+\mathrm{MSE}=\frac{1}{N} \sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2
+\end{equation}
+
+RMSE is the square root of the MSE. It is used to measure the standard deviation of the residuals.
+\begin{equation}
+\mathrm{RMSE}=\sqrt{\frac{1}{N} \sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2}
+\end{equation}
+
+The MAE represents the average of the absolute difference between the actual and predicted values in the result. It is used to measures the average of the residuals in the result.
+\begin{equation}
+\mathrm{MAE}=\frac{1}{N} \sum_{i=1}^N\left|y_i-\hat{y}_i\right|
+\end{equation}
+
+$R^2$ represents the proportion of the variance in the dependent variables, which is explained by the regression model:
+\begin{equation}
+R^2=1-\frac{\sum_{i=1}^N\left(y_i-\hat{y}_i\right)^2}{\sum_{i=1}^N\left(y_i-\bar{y}\right)^2}
+\end{equation}
+where $y_i$ is the actual value and $\hat{y}_i$ the predicted value. $\Bar{y}$ is the mean value of the actual dataset.
+
+\subsection{Impact of input image size on accuracy}
+
+Figure-\ref{fig-imgsiez} shows the R-squared test result of the one-bolt and multi-bolt series. For the one-bolt series, the size of the input image does not greatly influence the verification result. However, when the training data has 10 different bolts and the input image is reduced to 224 ($0.15 mm/pixel$), the R-squared (accuracy) of the validation results drops dramatically to approximately  0.5. This is so because when there are multiple bolts, the amount of features to be extracted is more than that of a single bolt. \\
+Additionally, the time required for each series of calculations is shown in the figure. When the training data reaches 8,000 images (multiple bolts), it takes 117 hours to train a set of high-resolution images (size 1,120, $0.029 mm/pixel$) and 15 hours to train images of size 448 ($0.073 mm/pixel$) that have a small R-squared (accuracy) difference. Considering the computational cost and feasibility of the application for real-time bolt axial force detection, sizes 448 or 672 are the recommended image sizes. The image size here is the image that contains exactly the entire bolt head.
+
+\begin{figure*}
+    \centering
+\subfigure[R-squared]{
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/imgsize.eps}
+    \end{minipage}}
+\subfigure[Times]{
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/imgsize-time.eps}
+    \end{minipage}}
+    \caption{the R-squared and time test result of one-bolt series and multi-bolt series}
+    \label{fig-imgsiez}
+\end{figure*}
+
+\subsection{Total result}
+The relationship between the prediction and label data of the one-bolt and multi-bolt series is shown in Figure-\ref{fig-predicdata}. Regarding the validation dataset, most of the predictions were accurate. When valid multiple bolts, detected bolt axial force has a large variate. It is assumed that  because each bolt head has a different shape, the network detects the bolt head features incorrectly .\\
+Table-\ref{tab-allresult} shows the total validation result of the one-bolt and multi-bolt series. Dropout is a regularization technique used to reduce overfitting in neural networks by randomly setting a fraction of the input units to 0 during training. The greater the dropout parameter, the better the obtained result.  Even when the parameter is 0.8, the training results is great. the amount of features needed to train a network using the bolt heads is not as large as expected, and this task does not require particularly high-pixel images.\\
+On the test dataset, an $R^2$ value of only 0.48 is attained, indicating that this network could not detect bolt axial force in diverse environments with different bolts. The surface traits of each bolt head varied and the relative positions of the head inscriptions were inconsistent, thereby resulting in the inability of the network to obtain the required amount of features. Since the training data had been greatly augmented, the input images were grayscale, and the images were cropped to include only the bolt head during training, it can be concluded that environmental factors hardly affect the model performance. 
+
+\begin{figure}
+\centering
+\subfigure[Onebolt]{
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/1b-valid.png}
+    \end{minipage}}
+\subfigure[Multibolt]{ 
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/case3-1predictpreload.png}
+    \end{minipage}}
+    \caption{Relationship between prediction and label data}    \label{fig-predicdata}
+\end{figure}
+
+\begin{table}[htbp]
+\processtable{Total validation result.}{
+\begin{tabular}{@{}ccccccccc@{}}
+\toprule
+case & Series & Input size & FC layer & Droupout & MSE    & RMSE  & MAE   & $R^2$ \\ \midrule
+1    & one    & 224        & 1        & 0        & 221.89 & 14.89 & 9.9   & 0.8   \\
+2    & one    & 448        & 1        & 0        & 214.98 & 14.31 & 8.94  & 0.82  \\
+3    & one    & 672        & 1        & 0        & 208    & 14.4  & 8.9   & 0.84  \\
+4    & one    & 1120       & 1        & 0        & 146.34 & 12.1  & 6.92  & 0.87  \\
+5    & one    & 448        & 1        & 0.8      & 134.74 & 11.6  & 7.13  & 0.88  \\
+6    & one    & 448        & 3        & 0        & 135    & 11.8  & 7.86  & 0.87  \\
+7    & one    & 448        & 3        & 0.25     & 131    & 11.4  & 7.06  & 0.88  \\
+8    & one    & 448        & 3        & 0.5      & 124.6  & 11.4  & 7.06  & 0.89  \\
+9    & one    & 448        & 3        & 0.8      & 99.2   & 9.96  & 5.88  & 0.91  \\
+10   & Multi  & 224        & 3        & 0.8      & 352.31 & 26.23 & 14.2  & 0.58  \\
+11   & Multi  & 448        & 3        & 0.8      & 273.01 & 16.52 & 10.57 & 0.73  \\
+12   & Multi  & 672        & 3        & 0.8      & 251.15 & 15.34 & 10.25 & 0.73  \\
+13   & Multi  & 1120       & 3        & 0.8      & 246.2  & 15.1  & 9.83  & 0.74 \\ 
+14   & Test-multi & 448    & 3        & 0.8      & 614.55 & 25.75 & 18.32 & 0.48 \\
+\bottomrule
+\label{tab-allresult}
+\end{tabular}}{}
+\end{table}
+
+\subsection{Training loss}
+Figure-\ref{fig-trainloss} shows the relationship between total loss and epoch (a is case 5 and b is case 10).  Most cases converge to 0 loss at approximately 250 epochs. The training was suspended after reaching approximately 500 epochs. Although the validation loss fluctuated slightly between 250 and 500 epochs, no over-fitting occurred.
+
+\begin{figure*}
+    \centering
+\subfigure[Case5]{
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/trainloss2-6.eps}
+    \end{minipage}}
+\subfigure[Case10]{
+    \begin{minipage}[t]{0.45\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{pic/trainloss3-1.eps}
+    \end{minipage}}
+    \caption{Total loss under different cases}
+    \label{fig-trainloss}
+\end{figure*}
+
+\section{Conclusion}
+
+This study used a modified ResNet-based neural network to detect the bolt axial force using bolt head images. When the bolt is subject to an axial force, the head of the bolt deformed into a concave shape, and the axial force of the bolt was detected by determining the relative change in the features of the bolts' head. The network included a dropout layer to prevent overfitting and a modified output full connection layer; further, the activated function changed network to the regression method. 
+%\vspace{-0pt} 
+\begin{itemize}
+\item When the input image size was reduced from $1120\times 1120$ ($0.029 mm/pixel$) to $448 \times 448$ pixels ($0.073 mm/pixel$),the validation results converged and did not change considerably. Even when the image size was reduced to 448 pixels it was able to obtain correct results for axial force detection and the R-squared is 0.91 and the mean absolute error is 5.8 kN. Considering the computational cost and feasibility of the application of this method for real-time bolt axial force detection, 448 or 672 are the recommended image sizes. The image size in this study is that of the entire bolt head.
+\item The dropout layer plays an important role in optimizing the training results, and even if the dropout parameter is set to 0.8, it obtains good training results. The number of features needed to train the network using the bolt head images was not as large as expected.
+\item Although good results on the validation set were obtained using this model, the network did not work properly on the test set. Further research must be conducted to overcome the variations in the number of features corresponding to the different bolts.
+\end{itemize}
+
+
+%\vspace{-pt} 
+\section*{Acknowledgement}
+This work was supported by the SPRING program of the Japan Science and Technology Agency (JST SPRING, Grant No. JPMJSP2139).
+
+%\vspace{-4pt} 
+\normalsize{
+\bibliography{mendeley,ref}
+}
+\end{document}
