@@ -63,15 +63,15 @@ Do
 
     
 	executeLoop(objFolder)
+	WScript.sleep(50000)
 Loop
-
 
 Sub queueLoop(objFolder)
 	On Error Resume Next
 	For Each objFile1 In objFolder.Files
 		If Right(objFile1.Name, 4)=".inp" and Left(objFile1.Name, 8)<>"_queued_" and objFSO.FileExists(Replace(objFile1.Name, ".inp", ".log")) = False Then
 			objFSO.MoveFile objFile1, objFile1.ParentFolder & "\_queued_" & Year(Now) & right("0" & Month(Now), 2) & right("0" & Day(Now), 2) & "_" & right("0" & Hour(Now), 2) & right("0" & Minute(Now), 2) & right("0" & Second(Now), 2) & "_" &  objFile1.Name
-			Exit Sub
+			WScript.sleep(1000) 'add 1s wait
 		End If
 	Next
 End Sub
@@ -116,7 +116,7 @@ Sub executeLoop(objFolder)
 			strFile3 = Right(objFile1.Name, Len(objFile1.Name) - 24)
 			objFSO.MoveFile objFile1, strFile3
 			objShell.Run "abaqus job=" & Replace(strFile3, ".inp", "") & " cpus=" & intCPU & " gpus=1 ask_delete=OFF"
-			WScript.sleep(13000) 'change time to 15s
+			WScript.sleep(5000) 'change time to 60s
 			intJ = intJ + 1
 		End If
         If intJ >= intThread - intI Then
